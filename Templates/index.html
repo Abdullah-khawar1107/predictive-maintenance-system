@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictive Maintenance System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>⚙️ Predictive Maintenance Dashboard</h1>
+
+    <div class="info-box">
+        <h3>Predictive Maintenance System</h3>
+        <p>
+            Enter machine sensor readings and operational parameters.
+            The machine learning model will predict whether the equipment
+            is likely to experience a failure.
+        </p>
+    </div>
+
+    <div class="form">
+
+        <label>
+            Machine Type
+            <small>(0 = Low, 1 = Medium, 2 = High)</small>
+        </label>
+        <input type="number" id="Type" min="0" max="2" placeholder="Example: 1">
+
+        <label>
+            Air Temperature (K)
+            <small>Recommended Range: 295 - 305</small>
+        </label>
+        <input type="number" id="AirTemperature" placeholder="Example: 300">
+
+        <label>
+            Process Temperature (K)
+            <small>Recommended Range: 305 - 315</small>
+        </label>
+        <input type="number" id="ProcessTemperature" placeholder="Example: 310">
+
+        <label>
+            Rotational Speed (RPM)
+            <small>Recommended Range: 1100 - 3000</small>
+        </label>
+        <input type="number" id="RotationalSpeed" placeholder="Example: 1500">
+
+        <label>
+            Torque (Nm)
+            <small>Recommended Range: 3 - 80</small>
+        </label>
+        <input type="number" id="Torque" placeholder="Example: 40">
+
+        <label>
+            Tool Wear (Minutes)
+            <small>Recommended Range: 0 - 250</small>
+        </label>
+        <input type="number" id="ToolWear" placeholder="Example: 120">
+
+        <button id="predictButton" onclick="predictFailure()">
+            Predict Machine Failure
+        </button>
+
+    </div>
+
+    <div id="result"></div>
+    <div class="gauge-container">
+    <svg class="gauge" viewBox="0 0 120 120">
+        <circle class="gauge-bg" cx="60" cy="60" r="50"></circle>
+        <circle class="gauge-fill" cx="60" cy="60" r="50"></circle>
+    </svg>
+
+    <div class="gauge-text">
+        <span id="riskPercent">0%</span>
+        <small>Failure Risk</small>
+    </div>
+</div>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
